@@ -44,7 +44,7 @@ class Program
             {
                 return;
             }
-            busSession.Send("MySatellite.targetQueue", new DoSomething());
+            busSession.Send("targetQueue", new DoSomething());
         }
     }
 }

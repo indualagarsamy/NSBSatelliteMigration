@@ -12,11 +12,8 @@ public class MySatelliteFeature : Feature
 
     protected override void Setup(FeatureConfigurationContext context)
     {
-        string processorAddress;
-
-        // TODO: How can I specify a queue that's different from the endpoint instance name. 
-        var messageProcessorPipeline = context.AddSatellitePipeline("CustomSatellite", "targetQueue", TransportTransactionMode.TransactionScope, PushRuntimeSettings.Default, out processorAddress);
-        // In this example, the satellite input queue is [endpointname].targetqueue. Where targetQueue is the qualifier. What if I want a queue that's say "InputQueue"?
+        // In this example, the satellite input queue is targetqueue. 
+        var messageProcessorPipeline = context.AddSatellitePipeline("CustomSatellite", "targetQueue", TransportTransactionMode.TransactionScope, PushRuntimeSettings.Default);
             
         // Register the satellite
         messageProcessorPipeline.Register("CustomSatellite", new MySatelliteBehavior(), "Description of what the satellite does");
