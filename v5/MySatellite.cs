@@ -8,7 +8,7 @@ namespace NsbSatellite
     {
         public bool Handle(TransportMessage message)
         {
-            Console.WriteLine("Received message");
+            Console.WriteLine("Satellite Received message");
             return true;
         }
 

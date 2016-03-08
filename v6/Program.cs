@@ -14,7 +14,7 @@ class Program
     {
         EndpointConfiguration endpointConfiguration = new EndpointConfiguration();
         endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.EndpointName("MySatellite");
+        endpointConfiguration.EndpointName("NsbSatellite-v6");
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
 
@@ -45,6 +45,7 @@ class Program
                 return;
             }
             busSession.Send("targetQueue", new DoSomething());
+            busSession.Send("targetQueue-adv", new DoSomething());
         }
     }
 }

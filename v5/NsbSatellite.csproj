@@ -49,8 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigErrorQueue.cs" />
+    <Compile Include="MyAdvancedSatellite.cs" />
     <Compile Include="MySatellite.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="SatelliteImportFailuresHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

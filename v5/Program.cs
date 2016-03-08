@@ -12,7 +12,7 @@ namespace NsbSatellite
         static void Main(string[] args)
         {
             BusConfiguration busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("Samples.SelfHosting");
+            busConfiguration.EndpointName("NsbSatellite-v5");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
@@ -21,6 +21,7 @@ namespace NsbSatellite
             {
                 Console.WriteLine("\r\nBus created and configured; press any key to stop program\r\n");
                 bus.Send("targetqueue", new DoSomething());
+                bus.Send("targetqueue-adv", new DoSomething());
                 Console.ReadKey();
             }
         }
