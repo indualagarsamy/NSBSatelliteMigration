@@ -4,7 +4,6 @@ using NServiceBus.Transports;
 
 public class MyAdvancedSatelliteFeature : Feature
 {
-
     public MyAdvancedSatelliteFeature()
     {
         EnableByDefault();
@@ -13,9 +12,11 @@ public class MyAdvancedSatelliteFeature : Feature
     protected override void Setup(FeatureConfigurationContext context)
     {
         // In this example, the satellite input queue is targetqueue. 
-        var messageProcessorPipeline = context.AddSatellitePipeline("AdvancedSatellite", "targetQueue-adv", TransportTransactionMode.TransactionScope, PushRuntimeSettings.Default);
-            
-        // Register the satellite
-        messageProcessorPipeline.Register("AdvancedSatellite", new MyAdvancedSatelliteBehavior(), "Description of what the advanced satellite does");
-    }
+        var messageProcessorPipeline = context.AddSatellitePipeline("AdvancedSatellite", TransportTransactionMode.TransactionScope, PushRuntimeSettings.Default, "targetQueue-adv");
+        
+        // register the critical error
+        messageProcessorPipeline.Register("AdvancedSatellite", b => new MyAdvancedSatelliteBehavior(b.Build<CriticalError>()),
+                "Description of what the advanced satellite does");
+
+   }
 }

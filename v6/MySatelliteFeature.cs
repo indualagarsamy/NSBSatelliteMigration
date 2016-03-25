@@ -13,7 +13,7 @@ public class MySatelliteFeature : Feature
     protected override void Setup(FeatureConfigurationContext context)
     {
         // In this example, the satellite input queue is targetqueue. 
-        var messageProcessorPipeline = context.AddSatellitePipeline("CustomSatellite", "targetQueue", TransportTransactionMode.TransactionScope, PushRuntimeSettings.Default);
+        var messageProcessorPipeline = context.AddSatellitePipeline("CustomSatellite", TransportTransactionMode.TransactionScope, PushRuntimeSettings.Default, "targetQueue");
             
         // Register the satellite
         messageProcessorPipeline.Register("CustomSatellite", new MySatelliteBehavior(), "Description of what the satellite does");

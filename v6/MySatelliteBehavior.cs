@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using NServiceBus.Pipeline;
 
-class MySatelliteBehavior : PipelineTerminator<IIncomingPhysicalMessageContext>
+class MySatelliteBehavior : PipelineTerminator<ISatelliteProcessingContext>
 {
-    protected override Task Terminate(IIncomingPhysicalMessageContext context)
+    protected override Task Terminate(ISatelliteProcessingContext context)
     {
         Console.WriteLine("Invoking Satellite behavior");
         return Task.FromResult(true);

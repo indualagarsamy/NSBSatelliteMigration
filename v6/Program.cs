@@ -12,11 +12,11 @@ class Program
 
     static async Task AsyncMain()
     {
-        EndpointConfiguration endpointConfiguration = new EndpointConfiguration();
+        EndpointConfiguration endpointConfiguration = new EndpointConfiguration("NsbSatellite - v6");
         endpointConfiguration.SendFailedMessagesTo("error");
-        endpointConfiguration.EndpointName("NsbSatellite-v6");
         endpointConfiguration.EnableInstallers();
         endpointConfiguration.UsePersistence<InMemoryPersistence>();
+        endpointConfiguration.DefineCriticalErrorAction(OnCriticalError);
 
         IEndpointInstance endpoint = await Endpoint.Start(endpointConfiguration);
         try
@@ -27,6 +27,18 @@ class Program
         {
             await endpoint.Stop();
         }
+    }
+
+    static Task OnCriticalError(ICriticalErrorContext context)
+    {
+        // If you want the process to be active, stop the endpoint. 
+        Console.WriteLine("CriticalError action triggered!");
+        return context.Stop();
+
+
+        // If you want to kill the process, await the above, then raise a fail fast error as shown below. 
+        //string failMessage = string.Format("Critical error shutting down:'{0}'.", context.Error);
+        //Environment.FailFast(failMessage, context.Exception);
     }
 
 
